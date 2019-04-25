@@ -5,7 +5,7 @@ $('#body-row .collapse').collapse('hide');
 $('#collapse-icon').addClass('fa-angle-double-left'); 
 
 // Collapse click
-$('[data-toggle=sidebar-colapse]').click(function() {
+$('[data-toggle=sidebar-collapse]').click(function() {
     SidebarCollapse();
 });
 
@@ -26,3 +26,16 @@ function SidebarCollapse () {
     // Collapse/Expand icon
     $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
 }
+
+$('#sidebar > ul > li > a').click(function(e){
+    localStorage.setItem("activeSubMenu", $(this).text());
+ });
+
+$(document).ready(function(){
+    var activeItem = localStorage.getItem("activeSubMenu");
+    if(activeItem){
+        $('#sidebar > ul > li> a').filter(function() {
+            return $(this).text() == activeItem;
+        }).slideToggle();
+    }
+});
